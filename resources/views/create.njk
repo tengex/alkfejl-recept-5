@@ -45,28 +45,22 @@
 
     <div class="container">
       <div class="row">
-
-        {% for category in categories %}
-        <div class="col-md-4 col-sm-6 col-xs-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              {{ category.name }}
-              <span class="label label-warning pull-right">Warning</span>
-            </div>
-            <ul class="list-group">
-              {% for recipe in category.recipes %}
-              <li class="list-group-item">
-                <a href="/recipe/{{ recipe.id }}">{{ recipe.name }}</a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        {% endfor %}
-        
-
-
-
+        <ul>
+          {% for error in old('errors') %}
+            <li>{{ error.message }}</li>
+          {% endfor %}
+        </ul>
+        <form method="POST">
+          {{ csrfField }}
+          <input name="name" value="{{ old('name') }}"/>
+          <textarea name="description">{{ old('description') }}</textarea>
+          <select name="category_id">
+            {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+          <input type="submit"/>
+        </form>
       </div>
     </div>
 

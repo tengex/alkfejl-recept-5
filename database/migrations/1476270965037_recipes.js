@@ -9,6 +9,7 @@ class RecipesSchema extends Schema {
       table.increments()
       table.string('name')
       table.string('description')
+      table.integer('category_id')
       table.timestamps()
     })
   }
