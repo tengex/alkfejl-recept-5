@@ -49,10 +49,46 @@ class RecipeController {
     * show(req, res) {
 
         var recipe=yield Recipe.findBy('id', req.param('id'));
-        console.log(recipe);
-        yield res.sendView('create', {
-            //categories: categories.toJSON(),
+        yield recipe.related('category').load()
+
+
+        yield res.sendView('show', {
+            recipe: recipe.toJSON()
         });
+    }
+
+    * edit(req, res) {
+
+        const categories = yield Category.all();
+        var recipe=yield Recipe.findBy('id', req.param('id'));
+        yield recipe.related('category').load()
+
+        yield res.sendView('edit', {
+            categories: categories.toJSON(),
+            recipe: recipe.toJSON()
+        });
+    }
+
+
+    * editSubmit(req, res) {
+        var post = req.post();
+        var recipe=yield Recipe.findBy('id', req.param('id'));
+        
+        recipe.name=post.name;
+        recipe.description=post.description;
+        recipe.category_id=post.category_id;
+
+        yield recipe.save();
+
+        res.redirect('/');
+    }
+
+    * delete(req, res) {
+        var recipe=yield Recipe.findBy('id', req.param('id'));
+        
+        yield recipe.delete();
+
+        res.redirect('/');
     }
 }
 

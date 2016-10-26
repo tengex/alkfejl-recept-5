@@ -9,3 +9,6 @@ Route.get('/', 'RecipeController.list');
 Route.get('/create', 'RecipeController.create');
 Route.post('/create', 'RecipeController.createNew');
 Route.get('/recipe/:id', 'RecipeController.show');
+Route.get('/recipe/:id/edit', 'RecipeController.edit');
+Route.post('/recipe/:id/edit', 'RecipeController.editSubmit');
+Route.post('/recipe/:id/delete', 'RecipeController.delete');

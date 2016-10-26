@@ -9,14 +9,14 @@
   </ul>
   <form method="POST">
     {{ csrfField }}
-    <input name="name" value="{{ old('name') }}"/>
-    <textarea name="description">{{ old('description') }}</textarea>
+    <input name="name" value="{{ recipe.name }}"/>
+    <textarea name="description">{{ recipe.description }}</textarea>
     <select name="category_id">
       {% for category in categories %}
-      <option value="{{ category.id }}">{{ category.name }}</option>
+      <option {{'selected' if recipe.category_id == category.id}} value="{{ category.id }}">{{ category.name }}</option>
       {% endfor %}
     </select>
-    <input type="submit"/>
+    <input type="submit" value="Mentés"/>
   </form>
 </div>
 {% endblock %}
