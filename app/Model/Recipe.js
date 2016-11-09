@@ -3,7 +3,7 @@
 const Lucid = use('Lucid')
 
 class Recipe extends Lucid {
- static get rules () {
+    static get rules () {
         return {
             name: 'required|unique:recipes',
             description: 'required',
